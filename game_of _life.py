@@ -1,3 +1,16 @@
-print("Hello world")
+from tkinter import *
 
-print("goodbye world")
+
+file_entry =
+
+
+
+
+
+
+
+
+
+
+
+
