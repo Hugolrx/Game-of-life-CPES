@@ -18,7 +18,7 @@ def change_col(bouton) :        # changement de couleur des boutons
 
 def buttons() :             # implémentation des boutons pour initialiser la grille et les contrôles
 
-    for i in range(20) :
+    for i in range(25) :
         grid_display.append([])
         for j in range(25) :
             grid_display[i].append(Button(root, padx=12, bg="white", activebackground="black"))
