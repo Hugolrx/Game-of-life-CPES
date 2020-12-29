@@ -101,7 +101,7 @@ def generation_plateau(grid) :    # destruction des boutons et remplacement par 
     for i in range(len(grid)) :
         for j in range(len(grid)) :
 
-            if grid[i][j] % 2 == 1 :
+            if grid[i][j] % 2 == 0 :
                 color = "white"
             else :
                 color = "black"
