@@ -101,7 +101,7 @@ def generation_plateau(grid) :    # destruction des boutons et remplacement par 
     for i in range(len(grid)) :
         for j in range(len(grid)) :
 
-            if grid[i][j] == 0 :
+            if grid[i][j] % 2 == 1 :
                 color = "white"
             else :
                 color = "black"
@@ -126,7 +126,7 @@ def update(grid) :          # fonction d'actualisation des Labels à partir d'un
     for i in range(len(grid)) :
         for j in range(len(grid[0])) :
 
-            if grid[i][j] == 0 :
+            if grid[i][j] % 2 == 0 :
                 color = "white"
             else :
                 color = "black"
@@ -156,25 +156,25 @@ def resume(grid) :
 
 
 
-def voisines(i,j, grid) :
-    nb = 0
-    for k in [-1,0,1] :
-        for l in [-1,0,1] :
-            nb += grid[i+k][j+l]
-    nb -= grid[i][j]
-    return nb
-
-def next(grid):
-    new = [[0 for _ in range(len(grid))] for _ in range(len(grid))]
-    for i in range(1, len(grid)-1) :
-        for j in range(1, len(grid)-1) :
-            if grid[i][j] == 0 :
-                if voisines(i,j, grid) == 3 :
-                    new[i][j] = 1
-            if grid[i][j] == 1 :
-                if voisines(i,j, grid) == 2 or voisines(i,j, grid) == 3 :
-                    new[i][j] = 1
-    return new
+# def voisines(i,j, grid) :
+#     nb = 0
+#     for k in [-1,0,1] :
+#         for l in [-1,0,1] :
+#             nb += grid[i+k][j+l]
+#     nb -= grid[i][j]
+#     return nb
+#
+# def next(grid):
+#     new = [[0 for _ in range(len(grid))] for _ in range(len(grid))]
+#     for i in range(1, len(grid)-1) :
+#         for j in range(1, len(grid)-1) :
+#             if grid[i][j] == 0 :
+#                 if voisines(i,j, grid) == 3 :
+#                     new[i][j] = 1
+#             if grid[i][j] == 1 :
+#                 if voisines(i,j, grid) == 2 or voisines(i,j, grid) == 3 :
+#                     new[i][j] = 1
+#     return new
 
 
 
