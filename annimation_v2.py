@@ -7,6 +7,7 @@ root.title("Le Jeu de la Vie")
 
 # Hola
 
+taille = 25
 
 
 def change_col(bouton) :        # changement de couleur des boutons
@@ -60,8 +61,8 @@ def sauvegarde() :
         file_name = "Sauvegarde_tmp"
 
     f = open(f"{file_name}.txt", "w")
-    for i in range(25) :
-        for j in range(25) :
+    for i in range(len(grid_display)) :
+        for j in range(len(grid_display)) :
             if grid_display[i][j].cget("bg") == "black" :
                 f.write(f"{i} {j}\n")
     f.close
@@ -82,9 +83,9 @@ def grid_generation() :                 # création de la première grille 0_1
 
     else :
         grid = []
-        for i in range(25) :
+        for i in range(len(grid_display)) :
             grid.append([])
-            for j in range(25) :
+            for j in range(len(grid_display)) :
                 if grid_display[i][j].cget("bg") == "white" :
                     grid[i].append(0)
                 else :
@@ -126,22 +127,30 @@ def generation_plateau(grid) :    # destruction des boutons et remplacement par 
     #     for j in range(30) :
     #         grid_display[i][j].destroy()
 
+    pixel = 900
+    side = pixel/len(grid)
+    global c
+    c = Canvas(root, height = pixel, width = pixel, bg="grey")
+    c.grid(row=0, column=0)
+
     for i in range(len(grid)) :
         for j in range(len(grid)) :
 
-            if grid[i][j] % 2 == 1 :
+            grid_display[i][j].destroy()
+
+            if grid[i][j] % 2 == 0 :
                 color = "white"
             else :
                 color = "black"
 
-            grid_display[i][j].configure(bg=color, state=DISABLED)
-            # grid_display[i][j] = Label(root, padx=15, pady=5, bg=color, relief=RAISED)
-            # grid_display[i][j].grid(row=i, column=j)
+            grid_display[i][j] = c.create_rectangle(side*j, side*i, side*(j+1), side*(i+1), width=2, fill=color)
+
+
 
     global pause_button
     # Bouton de pause
     pause_button = Button(root, text="Pause", command=partial(pause, grid))
-    pause_button.grid(row=16, column = 50)
+    pause_button.grid(row=0, column = 50)
 
     update(grid)
 
@@ -160,7 +169,7 @@ def update(grid) :          # fonction d'actualisation des Labels à partir d'un
             else :
                 color = "black"
 
-            grid_display[i][j].configure(bg=color)
+            c.itemconfig(grid_display[i][j], fill = color)
 
     new_grid = main_evaluate(grid)     # fonction qui calcule la grille suivante
 
@@ -199,7 +208,7 @@ def pause(grid) :                   # qq pb à régler : reenr à l'ancienne vit
     pause_button.configure(text="Resume", command=partial(resume, grid))
 
 def resume(grid) :
-    speed_scale.set(1)
+    speed_scale.set(2)
     pause_button.configure(text="Pause", command=partial(pause, grid))
     update(grid)
 
@@ -208,7 +217,7 @@ def resume(grid) :
 
 
 grid_display = []
-taille = 25
+
 
 buttons()
 
